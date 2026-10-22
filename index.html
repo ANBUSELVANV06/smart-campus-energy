@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Campus Energy Monitoring</title>
+</head>
+<body>
+
+    <h1>Smart Campus Energy Monitoring System</h1>
+
+    <h2 id="total"></h2>
+    <h2 id="highest"></h2>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Building</th>
+            <th>Consumption (kWh)</th>
+            <th>Target (kWh)</th>
+            <th>Status</th>
+            <th>Excess (kWh)</th>
+        </tr>
+        <tbody id="data"></tbody>
+    </table>
+
+    <script>
+        const limit = 100;
+
+        const buildings = [
+            {name: "Academic Block", consumption: 120, target: 100},
+            {name: "Library", consumption: 85, target: 90},
+            {name: "Computer Lab", consumption: 150, target: 120}
+        ];
+
+        let total = 0;
+        let highest = buildings[0];
+
+        buildings.forEach(function(b) {
+            total += b.consumption;
+
+            if (b.consumption > highest.consumption) {
+                highest = b;
+            }
+
+            let status;
+            let excess;
+
+            if (b.consumption > limit) {
+                status = "WARNING";
+                excess = b.consumption - limit;
+            } else {
+                status = "Normal";
+                excess = 0;
+            }
+
+            document.getElementById("data").innerHTML += `
+                <tr>
+                    <td>${b.name}</td>
+                    <td>${b.consumption}</td>
+                    <td>${b.target}</td>
+                    <td>${status}</td>
+                    <td>${excess}</td>
+                </tr>
+            `;
+        });
+
+        document.getElementById("total").textContent =
+            "Total Consumption: " + total + " kWh";
+
+        document.getElementById("highest").textContent =
+            "Highest Usage: " + highest.name;
+    </script>
+
+</body>
+</html>
