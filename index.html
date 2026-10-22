@@ -9,6 +9,7 @@
 
     <h2 id="total"></h2>
     <h2 id="highest"></h2>
+    <h3 id="recommendation"></h3>
 
     <table border="1" cellpadding="10">
         <tr>
@@ -68,6 +69,16 @@
         document.getElementById("highest").textContent =
             "Highest Usage: " + highest.name;
     </script>
+    let recommendation = "";
+
+if (total > 300) {
+    recommendation = "High campus usage! Reduce unnecessary lighting and AC.";
+} else {
+    recommendation = "Campus energy usage is within the target range.";
+}
+
+document.getElementById("recommendation").textContent =
+    "Energy Recommendation: " + recommendation;
 
 </body>
-</html>
+</html>s
